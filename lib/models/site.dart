@@ -22,7 +22,7 @@ class Site {
 
   int cityId;
 
-  Cities city;
+  //Cities city;
 
   double latitude;
 
@@ -35,12 +35,12 @@ class Site {
   int siteTypeId;
   // range from 1 to 200//
 
-  SiteType siteType;
+  //SiteType siteType;
 
   int subSiteTypeId;
   // range from 1 to 200//
 
-  SiteType subSiteType;
+  //SiteType subSiteType;
 
   bool useGPS;
 
@@ -89,15 +89,12 @@ class Site {
       required this.address,
       required this.zone,
       required this.cityId,
-      required this.city,
       required this.latitude,
       required this.longitude,
       required this.phoneNumber,
       required this.email,
       required this.siteTypeId,
-      required this.siteType,
       required this.subSiteTypeId,
-      required this.subSiteType,
       required this.useGPS,
       required this.haveHomeDelivery,
       required this.facebookUrl,
@@ -119,46 +116,43 @@ class Site {
 
   factory Site.fromJson(Map<String, dynamic> json) {
     return Site(
-        businessId: json['businessId'],
-        name: json['name'],
-        normalizedName: json['normalizedName'],
-        businessDescription: json['businessDescription'],
-        businessPhrase: json['businessPhrase'],
-        businessLogo: json['businessLogo'],
-        contactName: json['contactName'],
-        address: json['address'],
-        zone: json['zone'],
-        cityId: json['cityId'],
-        city: new Cities.fromJson(json['city']),
-        latitude: json['latitude'],
-        longitude: json['longitude'],
-        phoneNumber: json['phoneNumber'],
-        email: json['email'],
-        siteTypeId: json['siteTypeId'],
-        siteType: new SiteType.fromJson(json['siteType']),
-        subSiteTypeId: json['subSiteTypeId'],
-        subSiteType: new SiteType.fromJson(json['subSiteType']),
-        useGPS: json['useGPS'],
-        haveHomeDelivery: json['haveHomeDelivery'],
-        facebookUrl: json['facebookUrl'],
-        twitterUrl: json['twitterUrl'],
-        instagramUrl: json['instagramUrl'],
-        webSiteUrl: json['webSiteUrl'],
-        schedule: json['schedule'],
-        isApproved: json['isApproved'],
-        confirmEmail: json['confirmEmail'],
-        isVerifiedSite: json['isVerifiedSite'],
-        ciiU1: json['ciiU1'],
-        ciiU2: json['ciiU2'],
-        ciiU3: json['ciiU3'],
-        ciiU4: json['ciiU4'],
-        fullAddress: json['fullAddress'],
+        businessId: json['businessId'] ?? '',
+        name: json['name'] ?? '',
+        normalizedName: json['normalizedName'] ?? '',
+        businessDescription: json['businessDescription'] ?? '',
+        businessPhrase: json['businessPhrase'] ?? '',
+        businessLogo: json['businessLogo'] ?? '',
+        contactName: json['contactName'] ?? '',
+        address: json['address'] ?? '',
+        zone: json['zone'] ?? '',
+        cityId: json['cityId'] ?? '',
+        latitude: json['latitude'] ?? 0,
+        longitude: json['longitude'] ?? 0,
+        phoneNumber: json['phoneNumber'] ?? '',
+        email: json['email'] ?? '',
+        siteTypeId: json['siteTypeId'] ?? 0,
+        subSiteTypeId: json['subSiteTypeId'] ?? 0,
+        useGPS: json['useGPS'] ?? false,
+        haveHomeDelivery: json['haveHomeDelivery'] ?? false,
+        facebookUrl: json['facebookUrl'] ?? "",
+        twitterUrl: json['twitterUrl'] ?? "",
+        instagramUrl: json['instagramUrl'] ?? "",
+        webSiteUrl: json['webSiteUrl'] ?? "",
+        schedule: json['schedule'] ?? "",
+        isApproved: json['isApproved'] ?? false,
+        confirmEmail: json['confirmEmail'] ?? "",
+        isVerifiedSite: json['isVerifiedSite'] ?? false,
+        ciiU1: json['ciiU1'] ?? "",
+        ciiU2: json['ciiU2'] ?? "",
+        ciiU3: json['ciiU3'] ?? "",
+        ciiU4: json['ciiU4'] ?? "",
+        fullAddress: json['fullAddress'] ?? "",
         createdOn: json['createdOn'] == null
             ? DateTime.now()
             : DateTime.parse(json['createdOn']),
         updatedOn: json['updatedOn'] == null
             ? DateTime.now()
             : DateTime.parse(json['updatedOn']),
-        id: json['id']);
+        id: json['id'] ?? 0);
   }
 }

@@ -9,7 +9,7 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
     final themeData = Theme.of(context);
     return AppBar(
       automaticallyImplyLeading: true,
-      title: SelectableText("Titulo"),
+      title: SelectableText("Detalle de la empresa"),
       actions: [
         IconButton(
           icon: const Icon(Icons.share),
@@ -20,12 +20,7 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.favorite),
           tooltip: "Favorite",
           onPressed: () {},
-        ),
-        IconButton(
-          icon: const Icon(Icons.search),
-          tooltip: "Buscar",
-          onPressed: () {},
-        ),
+        )
       ],
     );
   }

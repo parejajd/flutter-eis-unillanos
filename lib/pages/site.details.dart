@@ -26,11 +26,11 @@ class _DetailsPageState extends State<DetailsPage> {
       appBar: AdaptiveAppBar(),
       body: _body(),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'Add',
+        heroTag: 'Llamar',
         onPressed: () {},
         tooltip: "Llamar",
         child: Icon(
-          Icons.add,
+          Icons.call,
           color: Theme.of(context).colorScheme.onSecondary,
         ),
       ),
@@ -51,23 +51,103 @@ class _DetailsPageState extends State<DetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SelectableText(
-                    "Titulo",
+                    site!.name,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SelectableText(
+                    site!.businessPhrase,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SelectableText(
+                    "¿Quienes somos?",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SelectableText(
+                    site!.businessDescription,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SelectableText(
+                    "¿Que hacemos?",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SelectableText(
+                    site.ciiU1,
                     style: TextStyle(
                       color: Colors.black,
                     ),
                   ),
                   const SizedBox(height: 10),
                   SelectableText(
-                    "Subtitulo",
+                    site.ciiU2,
                     style: TextStyle(
                       color: Colors.black,
                     ),
                   ),
-                  const SizedBox(height: 48),
-                  SelectableText("Contenido",
-                      style: TextStyle(
-                        color: Colors.black,
-                      )),
+                  const SizedBox(height: 10),
+                  SelectableText(
+                    site.ciiU3,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SelectableText(
+                    site.ciiU4,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SelectableText(
+                    "Encuentranos en",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Icon(Icons.facebook),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Icon(Icons.facebook),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Icon(Icons.facebook),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  SelectableText(
+                    "¿En que lugar nos encuentras?",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                    ),
+                  ),
                 ],
               ),
             ),

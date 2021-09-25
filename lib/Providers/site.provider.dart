@@ -11,7 +11,7 @@ class SiteProvider {
     if (response.statusCode == 200) {
       var jsonResponse =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
-      jsonResponse["name"].forEach((item) => site = Site.fromJson(item));
+      site = Site.fromJson(jsonResponse);
     }
     return site!;
   }
