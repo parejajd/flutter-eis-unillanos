@@ -2,9 +2,13 @@ import 'package:casanareapp/Providers/site.provider.dart';
 import 'package:casanareapp/models/site.dart';
 import 'package:casanareapp/widgets/layout/custombar.dart';
 import 'package:flutter/material.dart';
+import 'package:map/map.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPage extends StatefulWidget {
-  DetailsPage({Key? key}) : super(key: key);
+  int id = 16142;
+
+  DetailsPage({required this.id});
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -16,8 +20,16 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   void initState() {
-    _futureSite = siteProvidor.getSite();
+    _futureSite = siteProvidor.getSite(siteId: widget.id);
     super.initState();
+  }
+
+  Future<void> callnow({required String phone}) async {
+    if (await canLaunch("tel:+" + phone)) {
+      await launch("tel:+" + phone);
+    } else {
+      throw 'call not possible';
+    }
   }
 
   @override
@@ -27,7 +39,9 @@ class _DetailsPageState extends State<DetailsPage> {
       body: _body(),
       floatingActionButton: FloatingActionButton(
         heroTag: 'Llamar',
-        onPressed: () {},
+        onPressed: () async {
+          callnow(phone: (await _futureSite).phoneNumber);
+        },
         tooltip: "Llamar",
         child: Icon(
           Icons.call,

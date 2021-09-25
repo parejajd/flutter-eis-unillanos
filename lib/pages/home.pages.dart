@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DetailsPage(),
+                      builder: (context) => DetailsPage(id: 16142),
                     ),
                   )
                 },
