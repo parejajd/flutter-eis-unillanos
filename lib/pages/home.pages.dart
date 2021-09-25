@@ -1,5 +1,6 @@
 import 'package:casanareapp/Providers/cities.provider.dart';
 import 'package:casanareapp/models/cities.model.dart';
+import 'package:casanareapp/pages/site.details.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,7 +44,14 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.menu),
                 alignment: Alignment.bottomLeft,
                 // ignore: avoid_print
-                onPressed: () => print(listaCities),
+                onPressed: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailsPage(),
+                    ),
+                  )
+                },
               ),
             ],
           ),
