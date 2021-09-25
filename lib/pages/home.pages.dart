@@ -249,7 +249,17 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                         );
-                      } else {}
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ListBusinessPage(
+                                cityId: name!.id,
+                                siteTypeId: names!.id,
+                                text: myController.text),
+                          ),
+                        );
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(

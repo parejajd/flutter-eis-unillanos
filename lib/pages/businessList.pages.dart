@@ -3,18 +3,20 @@ import 'package:casanareapp/models/business.model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class ListBusinessPage extends StatefulWidget {
-  ListBusinessPage({Key? key}) : super(key: key);
+  int cityId;
+  int siteTypeId;
+  String text;
+
+  ListBusinessPage(
+      {required this.cityId, required this.siteTypeId, required this.text});
 
   @override
   _BusinessPageState createState() => _BusinessPageState();
 }
 
 class _BusinessPageState extends State<ListBusinessPage> {
-
   List<Business>? business = [];
-
 
   final titles = ["Negocio 1", "Negocio 2", "Negocio 3"];
   final subtitles = [
@@ -22,7 +24,11 @@ class _BusinessPageState extends State<ListBusinessPage> {
     "Here is Negocio 2 subtitle",
     "Here is Negocio 3 subtitle"
   ];
-  final icons = [Icons.ac_unit, FontAwesomeIcons.whatsapp, FontAwesomeIcons.twitter];
+  final icons = [
+    Icons.ac_unit,
+    FontAwesomeIcons.whatsapp,
+    FontAwesomeIcons.twitter
+  ];
 
   final BussinessProvider bussinessProvider = BussinessProvider();
   //business = bussinessProvider.getList({page: 1})
@@ -36,7 +42,7 @@ class _BusinessPageState extends State<ListBusinessPage> {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
         itemCount: titles.length,
         itemBuilder: (context, index) {
           return Card(
