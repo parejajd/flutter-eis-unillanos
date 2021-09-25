@@ -9,10 +9,9 @@ class CitiesProvider {
     var response =
         await http.get(Uri.https('casanare.app', '/api/v1/Catalog/cities/1'));
     if (response.statusCode == 200) {
-      var jsonResponse =
-          convert.jsonDecode(response.body) as Map<String, dynamic>;
-      jsonResponse["name"]
-          .forEach((item) => listaCities.add(Cities.fromJson(item)));
+      var jsonResponse = convert.jsonDecode(response.body) as List<dynamic>;
+      print(jsonResponse);
+      jsonResponse.forEach((item) => listaCities.add(Cities.fromJson(item)));
     }
     return listaCities;
   }
