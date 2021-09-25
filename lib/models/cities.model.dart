@@ -1,6 +1,6 @@
 class Cities {
   String name;
-  String departamentId;
+  int departamentId;
 
   Cities({
     required this.name,
