@@ -1,6 +1,8 @@
 import 'package:casanareapp/Providers/cities.provider.dart';
+import 'package:casanareapp/Providers/site.type.provider.dart';
 import 'package:casanareapp/models/cities.model.dart';
-import 'package:casanareapp/pages/site.details.dart';
+import 'package:casanareapp/models/site_type.dart';
+import 'package:casanareapp/pages/businessList.pages.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,17 +14,29 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final CitiesProvider citiesProvider = CitiesProvider();
+  final SiteTypeProvider siteTypeProvider = SiteTypeProvider();
   Future<List<Cities>>? listaCities;
+  Future<List<SiteType>>? listaSitesType;
 
   final bool _pinned = true;
   final bool _snap = false;
   final bool _floating = false;
   Object? values, values1;
+  Cities? name;
+  SiteType? names;
+  final myController = TextEditingController();
 
   @override
   void initState() {
     listaCities = citiesProvider.getCities();
+    listaSitesType = siteTypeProvider.getSiteType();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,14 +58,7 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.menu),
                 alignment: Alignment.bottomLeft,
                 // ignore: avoid_print
-                onPressed: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailsPage(),
-                    ),
-                  )
-                },
+                onPressed: () => print(listaCities),
               ),
             ],
           ),
@@ -65,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                     'Todo lo que buscas está en un solo lugar',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 27,
+                      fontSize: 18,
                     ),
                   ),
                 ),
@@ -113,10 +120,11 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return DropdownButton(
-                            value: values,
-                            onChanged: (newValue) {
+                            value: name,
+                            onChanged: (Cities? newValue) {
                               setState(() {
-                                values = newValue;
+                                name = newValue;
+                                print("${name!.id}");
                               });
                             },
                             iconSize: 36,
@@ -124,16 +132,17 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.black),
                             isExpanded: true,
                             items: snapshot.data!
-                                .map<DropdownMenuItem<String>>((Cities value) {
-                              return DropdownMenuItem<String>(
-                                value: value.name,
+                                .map<DropdownMenuItem<Cities>>((Cities value) {
+                              return DropdownMenuItem<Cities>(
+                                key: Key(value.id.toString()),
+                                value: value,
                                 child: Text(value.name,
                                     style: const TextStyle(
                                       color: Colors.white,
                                     )),
                               );
                             }).toList(),
-                            dropdownColor: Colors.black54,
+                            dropdownColor: Colors.black,
                           );
                         } else if (snapshot.hasError) {
                           return Text("${snapshot.error}");
@@ -150,28 +159,41 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
                 child: Container(
-                    child: DropdownButton(
-                      value: values1,
-                      onChanged: (newValue1) {
-                        setState(() {
-                          values1 = newValue1;
-                        });
+                    child: FutureBuilder<List<SiteType>>(
+                      future: listaSitesType,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return DropdownButton(
+                            value: names,
+                            onChanged: (SiteType? newValue1) {
+                              setState(() {
+                                names = newValue1;
+                                print("${names!.id}");
+                              });
+                            },
+                            iconSize: 36,
+                            icon: const Icon(Icons.arrow_drop_down,
+                                color: Colors.black),
+                            isExpanded: true,
+                            items: snapshot.data!
+                                .map<DropdownMenuItem<SiteType>>(
+                                    (SiteType values1) {
+                              return DropdownMenuItem<SiteType>(
+                                key: Key(values1.id.toString()),
+                                value: values1,
+                                child: Text(values1.name,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    )),
+                              );
+                            }).toList(),
+                            dropdownColor: Colors.black,
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text("${snapshot.error}");
+                        }
+                        return const CircularProgressIndicator();
                       },
-                      iconSize: 36,
-                      icon: const Icon(Icons.arrow_drop_down,
-                          color: Colors.black),
-                      isExpanded: true,
-                      items: <String>["Transporte", "compras"]
-                          .map<DropdownMenuItem<String>>((String values1) {
-                        return DropdownMenuItem<String>(
-                          value: values1,
-                          child: Text(values1,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              )),
-                        );
-                      }).toList(),
-                      dropdownColor: Colors.black54,
                     ),
                     decoration: BoxDecoration(
                       color: const Color.fromRGBO(67, 25, 161, 0.90),
@@ -184,9 +206,9 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                     child: Center(
                       child: Column(
-                        children: const [
+                        children: [
                           TextField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: "Palabras Clave de la Busqueda",
                               fillColor: Colors.white,
                               hintStyle: TextStyle(
@@ -194,6 +216,7 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 20,
                               ),
                             ),
+                            controller: myController,
                           ),
                         ],
                       ),
@@ -208,7 +231,18 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      // Respond to button press
+                      if (name == null) {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const AlertDialog(
+                              // Retrieve the text the that user has entered by using the
+                              // TextEditingController.
+                              content: Text("Error ingresa datos para buscar"),
+                            );
+                          },
+                        );
+                      } else {}
                     },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
@@ -224,6 +258,30 @@ class _HomePageState extends State<HomePage> {
                   alignment: Alignment.topRight,
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+                child: Container(
+                  child: _botones(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+                child: Container(
+                  child: _botones(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+                child: Container(
+                  child: _botones(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+                child: Container(
+                  child: _botones(),
+                ),
+              ),
             ]),
           ),
         ],
@@ -235,5 +293,21 @@ class _HomePageState extends State<HomePage> {
         fit: BoxFit.cover,
       )),
     ));
+  }
+
+  _botones() {
+    return ElevatedButton.icon(
+      onPressed: () {
+        // Respond to button press
+      },
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all(const Color.fromRGBO(118, 67, 234, 1)),
+        padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
+        textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 20)),
+      ),
+      icon: const Icon(Icons.add_a_photo, size: 18),
+      label: const Text("Mejoras"),
+    );
   }
 }
