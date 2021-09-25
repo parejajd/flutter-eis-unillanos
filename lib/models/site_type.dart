@@ -23,8 +23,8 @@ class SiteType {
     return SiteType(
         name: json['name'] ?? "",
         normalizedName: json['normalizedName'],
-        icon: json['icon'],
-        isFeatured: json['isFeatured'],
+        icon: json['icon'] ?? "",
+        isFeatured: json['isFeatured'] ?? false,
         level: json['level'],
         createdOn: json['createdOn'] == null
             ? DateTime.now()

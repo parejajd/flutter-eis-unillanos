@@ -40,8 +40,6 @@ class Site {
   int subSiteTypeId;
   // range from 1 to 200//
 
-  SiteType subSiteType;
-
   bool useGPS;
 
   bool haveHomeDelivery;
@@ -97,7 +95,6 @@ class Site {
       required this.siteTypeId,
       required this.siteType,
       required this.subSiteTypeId,
-      required this.subSiteType,
       required this.useGPS,
       required this.haveHomeDelivery,
       required this.facebookUrl,
@@ -137,7 +134,6 @@ class Site {
         siteTypeId: json['siteTypeId'] ?? 0,
         siteType: SiteType.fromJson(json['siteType']),
         subSiteTypeId: json['subSiteTypeId'] ?? 0,
-        subSiteType: SiteType.fromJson(json['subSiteType']),
         useGPS: json['useGPS'] ?? false,
         haveHomeDelivery: json['haveHomeDelivery'] ?? false,
         facebookUrl: json['facebookUrl'] ?? "",
