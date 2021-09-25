@@ -1,13 +1,38 @@
+import 'package:casanareapp/Providers/business.provider.dart';
+import 'package:casanareapp/models/business.model.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ListViewHome extends StatelessWidget {
-  final titles = ["List 1", "List 2", "List 3"];
+
+class ListBusinessPage extends StatefulWidget {
+  ListBusinessPage({Key? key}) : super(key: key);
+
+  @override
+  _BusinessPageState createState() => _BusinessPageState();
+}
+
+class _BusinessPageState extends State<ListBusinessPage> {
+
+  List<Business>? business = [];
+
+
+  final titles = ["Negocio 1", "Negocio 2", "Negocio 3"];
   final subtitles = [
-    "Here is list 1 subtitle",
-    "Here is list 2 subtitle",
-    "Here is list 3 subtitle"
+    "Here is Negocio 1 subtitle",
+    "Here is Negocio 2 subtitle",
+    "Here is Negocio 3 subtitle"
   ];
-  final icons = [Icons.ac_unit, Icons.access_alarm, Icons.access_time];
+  final icons = [Icons.ac_unit, FontAwesomeIcons.whatsapp, FontAwesomeIcons.twitter];
+
+  final BussinessProvider bussinessProvider = BussinessProvider();
+  //business = bussinessProvider.getList({page: 1})
+
+  @override
+  void initState() {
+    //_futureSite = siteProvidor.getSite();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
