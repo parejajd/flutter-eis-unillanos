@@ -108,28 +108,38 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
                 child: Container(
-                    child: DropdownButton(
-                      value: values,
-                      onChanged: (newValue) {
-                        setState(() {
-                          values = newValue;
-                        });
+                    child: FutureBuilder<List<Cities>>(
+                      future: listaCities,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return DropdownButton(
+                            value: values,
+                            onChanged: (newValue) {
+                              setState(() {
+                                values = newValue;
+                              });
+                            },
+                            iconSize: 36,
+                            icon: const Icon(Icons.arrow_drop_down,
+                                color: Colors.black),
+                            isExpanded: true,
+                            items: snapshot.data!
+                                .map<DropdownMenuItem<String>>((Cities value) {
+                              return DropdownMenuItem<String>(
+                                value: value.name,
+                                child: Text(value.name,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    )),
+                              );
+                            }).toList(),
+                            dropdownColor: Colors.black54,
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text("${snapshot.error}");
+                        }
+                        return const CircularProgressIndicator();
                       },
-                      iconSize: 36,
-                      icon: const Icon(Icons.arrow_drop_down,
-                          color: Colors.black),
-                      isExpanded: true,
-                      items: <String>["Yopal", "aguazul"]
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              )),
-                        );
-                      }).toList(),
-                      dropdownColor: Colors.black54,
                     ),
                     decoration: BoxDecoration(
                       color: const Color.fromRGBO(67, 25, 161, 0.90),
