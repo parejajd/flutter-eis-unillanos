@@ -19,6 +19,12 @@ class _HomePageState extends State<HomePage> {
   Object? values, values1;
 
   @override
+  void initState() {
+    listaCities = citiesProvider.getCities();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
@@ -206,7 +212,7 @@ class _HomePageState extends State<HomePage> {
       ),
       decoration: const BoxDecoration(
           image: DecorationImage(
-        image: AssetImage("/casanare.jpg"),
+        image: AssetImage("assets/casanare.jpg"),
         scale: 1000, // <-- BACKGROUND IMAGE
         fit: BoxFit.cover,
       )),

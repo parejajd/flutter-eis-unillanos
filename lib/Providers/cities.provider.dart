@@ -6,11 +6,8 @@ class CitiesProvider {
   Future<List<Cities>> getCities({int page = 1}) async {
     List<Cities> listaCities = [];
 
-    Map<String, String> parametros = {
-      'departamentId': '1',
-    };
-    var response = await http
-        .get(Uri.https('casanare.app', '/api/v1/Catalog/cities', parametros));
+    var response =
+        await http.get(Uri.https('casanare.app', '/api/v1/Catalog/cities/1'));
     if (response.statusCode == 200) {
       var jsonResponse =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
