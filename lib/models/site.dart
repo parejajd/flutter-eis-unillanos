@@ -22,7 +22,7 @@ class Site {
 
   int cityId;
 
-  //Cities city;
+  Cities city;
 
   double latitude;
 
@@ -35,12 +35,10 @@ class Site {
   int siteTypeId;
   // range from 1 to 200//
 
-  //SiteType siteType;
+  SiteType siteType;
 
   int subSiteTypeId;
   // range from 1 to 200//
-
-  //SiteType subSiteType;
 
   bool useGPS;
 
@@ -89,11 +87,13 @@ class Site {
       required this.address,
       required this.zone,
       required this.cityId,
+      required this.city,
       required this.latitude,
       required this.longitude,
       required this.phoneNumber,
       required this.email,
       required this.siteTypeId,
+      required this.siteType,
       required this.subSiteTypeId,
       required this.useGPS,
       required this.haveHomeDelivery,
@@ -126,11 +126,13 @@ class Site {
         address: json['address'] ?? '',
         zone: json['zone'] ?? '',
         cityId: json['cityId'] ?? '',
+        city: Cities.fromJson(json['city']),
         latitude: json['latitude'] ?? 0,
         longitude: json['longitude'] ?? 0,
         phoneNumber: json['phoneNumber'] ?? '',
         email: json['email'] ?? '',
         siteTypeId: json['siteTypeId'] ?? 0,
+        siteType: SiteType.fromJson(json['siteType']),
         subSiteTypeId: json['subSiteTypeId'] ?? 0,
         useGPS: json['useGPS'] ?? false,
         haveHomeDelivery: json['haveHomeDelivery'] ?? false,

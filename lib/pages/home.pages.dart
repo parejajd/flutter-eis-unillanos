@@ -3,6 +3,7 @@ import 'package:casanareapp/Providers/site.type.provider.dart';
 import 'package:casanareapp/models/cities.model.dart';
 import 'package:casanareapp/models/site_type.dart';
 import 'package:casanareapp/pages/businessList.pages.dart';
+import 'package:casanareapp/pages/site.details.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -58,7 +59,14 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.menu),
                 alignment: Alignment.bottomLeft,
                 // ignore: avoid_print
-                onPressed: () => print(listaCities),
+                onPressed: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailsPage(id: 16142),
+                    ),
+                  )
+                },
               ),
             ],
           ),
@@ -231,7 +239,7 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      if (name == null) {
+                      if (name == null || names == null) {
                         showDialog(
                           context: context,
                           builder: (context) {
