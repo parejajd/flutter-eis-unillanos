@@ -4,6 +4,7 @@ import 'package:casanareapp/models/cities.model.dart';
 import 'package:casanareapp/models/site_type.dart';
 import 'package:casanareapp/pages/businessList.pages.dart';
 import 'package:casanareapp/pages/site.details.dart';
+import 'package:casanareapp/widgets/sites.map.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,11 +62,9 @@ class _HomePageState extends State<HomePage> {
                 // ignore: avoid_print
                 onPressed: () => {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailsPage(id: 16142),
-                    ),
-                  )
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetailsPage(id: 16142)))
                 },
               ),
             ],

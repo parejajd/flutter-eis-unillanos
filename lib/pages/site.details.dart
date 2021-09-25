@@ -2,6 +2,7 @@ import 'package:casanareapp/Providers/site.provider.dart';
 import 'package:casanareapp/models/site.dart';
 import 'package:casanareapp/widgets/expandablebutton.dart';
 import 'package:casanareapp/widgets/layout/custombar.dart';
+import 'package:casanareapp/widgets/sites.map.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:map/map.dart';
@@ -21,9 +22,6 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   final SiteProvider siteProvidor = SiteProvider();
   late Future<Site> _futureSite;
-  final controller = MapController(
-    location: LatLng(35.68, 51.41),
-  );
 
   @override
   void initState() {
@@ -205,23 +203,20 @@ class _DetailsPageState extends State<DetailsPage> {
                 fontSize: 22,
               ),
             ),
-            Stack(children: [
-              Map(
-                controller: controller,
-                builder: (context, x, y, z) {
-                  //Legal notice: This url is only used for demo and educational purposes. You need a license key for production use.
-
-                  //Google Maps
-                  final url =
-                      'https://www.google.com/maps/vt/pb=!1m4!1m3!1i$z!2i$x!3i$y!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425';
-
-                  return CachedNetworkImage(
-                    imageUrl: url,
-                    fit: BoxFit.cover,
-                  );
-                },
-              ),
-            ])
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MarkersPage(
+                      site: site,
+                    ),
+                  ),
+                );
+              },
+              child: Icon(FontAwesomeIcons.mapMarkerAlt),
+            )
           ],
         ),
       ),
