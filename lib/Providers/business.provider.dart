@@ -19,7 +19,6 @@ class BussinessProvider {
     if (response.statusCode == 200) {
       var jsonResponse =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
-
       jsonResponse["sites"]
           .forEach((item) => listBussiness.add(Business.fromJson(item)));
     }

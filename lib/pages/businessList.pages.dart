@@ -19,12 +19,6 @@ class ListBusinessPage extends StatefulWidget {
 class _BusinessPageState extends State<ListBusinessPage> {
   Future<List<Business>>? business;
 
-  final titles = ["Negocio 1", "Negocio 2", "Negocio 3"];
-  final subtitles = [
-    "Here is Negocio 1 subtitle",
-    "Here is Negocio 2 subtitle",
-    "Here is Negocio 3 subtitle"
-  ];
   final icons = [
     Icons.ac_unit,
     FontAwesomeIcons.whatsapp,
@@ -35,6 +29,9 @@ class _BusinessPageState extends State<ListBusinessPage> {
 
   @override
   void initState() {
+    if (widget.text.isEmpty) {
+      widget.text = "*";
+    }
     business = bussinessProvider.getBussiness(
         cityId: widget.cityId,
         siteTypeId: widget.siteTypeId,
@@ -48,22 +45,23 @@ class _BusinessPageState extends State<ListBusinessPage> {
       future: business,
       builder: (BuildContext context, AsyncSnapshot<List<Business>> snapshot) {
         if (snapshot.hasData) {
-          List<Business>? articles = snapshot.data;
+          List<Business>? businesses = snapshot.data;
           List<Widget> list = [];
 
-          for (var article in articles!) {
+          for (var business in businesses!) {
             list.add(GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DetailsPage(id: article.id)),
+                        builder: (context) => DetailsPage(id: business.id)),
                   );
                 },
+                //return Container()
                 child: Card(
                     child: ListTile(
-                        title: Text(article.name),
-                        subtitle: Text(article.address),
+                        title: Text(business.name),
+                        subtitle: Text(business.address),
                         leading: CircleAvatar(
                             backgroundImage: NetworkImage(
                                 "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
