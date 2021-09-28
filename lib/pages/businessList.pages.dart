@@ -45,26 +45,30 @@ class _BusinessPageState extends State<ListBusinessPage> {
       future: business,
       builder: (BuildContext context, AsyncSnapshot<List<Business>> snapshot) {
         if (snapshot.hasData) {
-          List<Business>? articles = snapshot.data;
+          List<Business>? businesses = snapshot.data;
           List<Widget> list = [];
 
-          for (var article in articles!) {
+          for (var business in businesses!) {
             list.add(GestureDetector(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DetailsPage(id: 16142)),
+                        builder: (context) => DetailsPage(id: business.id)),
                   );
                 },
+                //return Container()
                 child: Card(
                     child: ListTile(
-                        title: Text(article.name),
-                        subtitle: Text(article.address),
+                        title: Text(business.name),
+                        subtitle: Text(business.address),
                         leading: CircleAvatar(
                             backgroundImage: NetworkImage(
                                 "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-                        trailing: Icon(Icons.keyboard_arrow_right)))));
+                        trailing: Icon(Icons.keyboard_arrow_right))
+                )
+              )
+            );
           }
           return ListView(children: list);
         } else {
