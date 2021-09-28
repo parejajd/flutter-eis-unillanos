@@ -1,5 +1,6 @@
 import 'package:casanareapp/Providers/site.provider.dart';
 import 'package:casanareapp/models/site.dart';
+import 'package:casanareapp/widgets/apptitle.widget.dart';
 import 'package:casanareapp/widgets/expandablebutton.dart';
 import 'package:casanareapp/widgets/layout/custombar.dart';
 import 'package:casanareapp/widgets/sites.map.dart';
@@ -90,79 +91,60 @@ class _DetailsPageState extends State<DetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SelectableText(
-              site.name,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 24,
-              ),
+            AppTitle(
+              text: site.name,
+              fontSize: 24,
+              icon: Icons.business_center,
+              color: Colors.black,
+              weight: FontWeight.bold,
             ),
-            const SizedBox(height: 10),
-            SelectableText(
-              site.businessPhrase,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 22,
-              ),
-            ),
+            site.businessPhrase.isEmpty
+                ? Container()
+                : Column(children: [
+                    const SizedBox(height: 10),
+                    SelectableText(
+                      site.businessPhrase,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                      ),
+                    )
+                  ]),
+            site.businessDescription.isEmpty
+                ? Container()
+                : Column(children: [
+                    const SizedBox(height: 20),
+                    AppTitle(
+                      text: "¿Quienes somos?",
+                      fontSize: 24,
+                      icon: Icons.business_center,
+                      color: Color.fromRGBO(118, 67, 234, 1),
+                      weight: FontWeight.w500,
+                    ),
+                    const SizedBox(height: 10),
+                    SelectableText(
+                      site.businessDescription,
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ]),
             const SizedBox(height: 20),
-            SelectableText(
-              "¿Quienes somos?",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 22,
-              ),
+            AppTitle(
+              text: "¿Que hacemos?",
+              fontSize: 22,
+              icon: Icons.work,
+              color: Color.fromRGBO(118, 67, 234, 1),
+              weight: FontWeight.w500,
             ),
-            const SizedBox(height: 10),
-            SelectableText(
-              site.businessDescription,
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
+            _buildServices(site: site),
             const SizedBox(height: 20),
-            SelectableText(
-              "¿Que hacemos?",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 22,
-              ),
-            ),
-            const SizedBox(height: 10),
-            SelectableText(
-              site.ciiU1,
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(height: 10),
-            SelectableText(
-              site.ciiU2,
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(height: 10),
-            SelectableText(
-              site.ciiU3,
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(height: 10),
-            SelectableText(
-              site.ciiU4,
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(height: 20),
-            SelectableText(
-              "Encuentranos en",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 22,
-              ),
+            AppTitle(
+              text: "Encuentranos en",
+              weight: FontWeight.w500,
+              fontSize: 22,
+              icon: Icons.network_check,
+              color: Color.fromRGBO(118, 67, 234, 1),
             ),
             Row(
               children: [
@@ -196,30 +178,98 @@ class _DetailsPageState extends State<DetailsPage> {
               ],
             ),
             const SizedBox(height: 20),
-            SelectableText(
-              "¿En que lugar nos encuentras?",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 22,
-              ),
+            AppTitle(
+              text: "¿En que lugar nos encuentras?",
+              weight: FontWeight.w500,
+              fontSize: 22,
+              icon: Icons.add_business_outlined,
+              color: Color.fromRGBO(118, 67, 234, 1),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MarkersPage(
-                      site: site,
-                    ),
-                  ),
-                );
-              },
-              child: Icon(FontAwesomeIcons.mapMarkerAlt),
-            )
+            SelectableText(
+              site.address,
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+            site.latitude == 0 || site.longitude == 0
+                ? Container()
+                : ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MarkersPage(
+                            site: site,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Icon(FontAwesomeIcons.mapMarkerAlt),
+                  )
           ],
         ),
       ),
     );
   }
+}
+
+_buildServices({required Site site}) {
+  return Container(
+    child: Padding(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          site.ciiU1.isEmpty
+              ? Container()
+              : Column(children: [
+                  const SizedBox(height: 10),
+                  SelectableText(
+                    site.ciiU1,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  )
+                ]),
+          site.ciiU2.isEmpty
+              ? Container()
+              : Column(children: [
+                  const SizedBox(height: 10),
+                  SelectableText(
+                    site.ciiU2,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  )
+                ]),
+          site.ciiU3.isEmpty
+              ? Container()
+              : Column(children: [
+                  const SizedBox(height: 10),
+                  SelectableText(
+                    site.ciiU3,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  )
+                ]),
+          site.ciiU4.isEmpty
+              ? Container()
+              : Column(children: [
+                  const SizedBox(height: 10),
+                  SelectableText(
+                    site.ciiU4,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  )
+                ]),
+        ],
+      ),
+    ),
+    decoration: new BoxDecoration(
+      color: Color.fromRGBO(255, 243, 205, 1),
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
 }

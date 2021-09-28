@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:casanareapp/models/cities.model.dart';
 import 'package:casanareapp/models/site_type.dart';
 
@@ -127,8 +129,8 @@ class Site {
         zone: json['zone'] ?? '',
         cityId: json['cityId'] ?? '',
         city: Cities.fromJson(json['city']),
-        latitude: json['latitude'] ?? 0,
-        longitude: json['longitude'] ?? 0,
+        latitude: double.parse(json['latitude']?.toString() ?? '0'),
+        longitude: double.parse(json['longitude']?.toString() ?? '0'),
         phoneNumber: json['phoneNumber'] ?? '',
         email: json['email'] ?? '',
         siteTypeId: json['siteTypeId'] ?? 0,

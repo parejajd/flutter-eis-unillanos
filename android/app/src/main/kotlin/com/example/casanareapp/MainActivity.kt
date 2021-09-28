@@ -1,4 +1,4 @@
-package com.example.casanareapp
+package co.creapps.casanareapp
 
 import io.flutter.embedding.android.FlutterActivity
 

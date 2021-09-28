@@ -10,18 +10,30 @@ class MarkersPage extends StatefulWidget {
   MarkersPage({required this.site});
 
   @override
-  _MarkersPageState createState() => _MarkersPageState();
+  _MarkersPageState createState() => _MarkersPageState(site: site);
 }
 
 class _MarkersPageState extends State<MarkersPage> {
-  final controller = MapController(
-    location: LatLng(35.674, 51.41),
+  Site site;
+  _MarkersPageState({required this.site});
+
+  var controller = MapController(
+    location: LatLng(0, 0),
   );
 
-  final markers = [LatLng(35.674, 51.41)];
+  List<LatLng> markers = [];
+
+  @override
+  void initState() {
+    controller = MapController(
+      location: LatLng(site.latitude, site.longitude),
+    );
+    markers = [LatLng(site.latitude, site.longitude)];
+    super.initState();
+  }
 
   void _gotoDefault() {
-    controller.center = LatLng(35.68, 51.41);
+    controller.center = LatLng(site.latitude, site.longitude);
     setState(() {});
   }
 

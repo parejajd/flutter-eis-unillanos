@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.casanareapp">
+    package="co.creapps.casanareapp">
    <application
-        android:label="casanareapp"
+        android:label="CasanareApp"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
