@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:casanareapp/models/cities.model.dart';
 import 'package:casanareapp/models/site_type.dart';
 
