@@ -3,6 +3,7 @@ class Business {
   String address;
   String contactName;
   String siteTypeName;
+  String phoneNumber;
   String logo;
   int id;
 
@@ -13,6 +14,7 @@ class Business {
     required this.siteTypeName,
     required this.id,
     required this.logo,
+    required this.phoneNumber,
   });
 
   factory Business.fromJson(Map<String, dynamic> json) => Business(
@@ -20,7 +22,9 @@ class Business {
         address: json["address"] ?? '',
         contactName: json["contactName"] ?? '',
         siteTypeName: json["siteTypeName"] ?? '',
-        logo: 'https://as2.ftcdn.net/v2/jpg/01/71/86/35/500_F_171863587_lbqZYspBATgdPhlA9XDhZmH3eMIlE2Cq.jpg',
+        phoneNumber: json["phoneNumber"] ?? '3214914812',
+        logo:
+            'https://as2.ftcdn.net/v2/jpg/01/71/86/35/500_F_171863587_lbqZYspBATgdPhlA9XDhZmH3eMIlE2Cq.jpg',
         id: json["id"] ?? 0,
       );
 }

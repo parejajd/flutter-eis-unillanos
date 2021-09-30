@@ -54,8 +54,8 @@ class _HomePageState extends State<HomePage> {
             floating: _floating,
             expandedHeight: 70.0,
             backgroundColor: const Color.fromRGBO(52, 26, 121, 1),
-            flexibleSpace:
-                Image.asset('assets/logo.png', alignment: Alignment.centerLeft),
+            flexibleSpace: Image.asset('assets/logoh.png',
+                alignment: Alignment.bottomCenter),
           ),
           const SliverToBoxAdapter(
             child: Padding(
@@ -66,9 +66,9 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     'Todo lo que buscas está en un solo lugar',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                    ),
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
