@@ -21,17 +21,69 @@ class CardWidget extends StatelessWidget {
         );
       },
       child: Card(
-        color: const Color.fromRGBO(52, 26, 121, 1),
-        shadowColor: Colors.green,
-        child: ListTile(
-            title: Text(business.name, style: Style.titleTextStyle),
-            subtitle: Text(business.address, style: Style.commonTextStyle),
-            leading: CircleAvatar(
-                backgroundImage: NetworkImage(business.logo)
+          child:Container(
+            height: 100,
+            color: Colors.white,
+            child: Row(
+              children: [
+                Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Expanded(
+                      child:CircleAvatar(
+                          backgroundImage: NetworkImage(business.logo)
+                      ),
+                      flex:2 ,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child:Container(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: ListTile(
+                            title: Text(business.name, style: Style.titleTextStyle),
+                            subtitle: Text(business.address, style: Style.smallTextStyle),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                child: Text("Llamar", style: Style.buttonTextStyle),
+                                onPressed: ()
+                                {},
+                              ),
+                              SizedBox(width: 8,),
+                              ElevatedButton(
+                                child: Text("Sms", style: Style.buttonTextStyle),
+                                onPressed: (){},
+                              ),
+                              SizedBox(width: 8,)
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  flex:8 ,
+                ),
+              ],
             ),
-            trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white)
-        )
-      )
+          ),
+          elevation: 8,
+          margin: EdgeInsets.all(20),
+          shadowColor: Color(0xFF311B92),
+          shape:  OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Color(0xFF311B92), width: 1)
+          ),
+        ),
     );
   }
 }
