@@ -1,5 +1,6 @@
 import 'package:casanareapp/models/business.model.dart';
 import 'package:casanareapp/pages/site.details.dart';
+import 'package:casanareapp/widgets/cards/style.dart';
 import 'package:flutter/material.dart';
 
 
@@ -19,35 +20,18 @@ class CardWidget extends StatelessWidget {
           ),
         );
       },
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  business.name,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    Text(business.address)
-                  ],
-                ),
-              ),
-
-            ],
-          ),
-          decoration: BoxDecoration(
-            color: Colors.black12,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      ),
+      child: Card(
+        color: const Color.fromRGBO(52, 26, 121, 1),
+        shadowColor: Colors.green,
+        child: ListTile(
+            title: Text(business.name, style: Style.titleTextStyle),
+            subtitle: Text(business.address, style: Style.commonTextStyle),
+            leading: CircleAvatar(
+                backgroundImage: NetworkImage(business.logo)
+            ),
+            trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white)
+        )
+      )
     );
   }
 }

@@ -1,10 +1,10 @@
 import 'package:casanareapp/Providers/business.provider.dart';
 import 'package:casanareapp/models/business.model.dart';
-import 'package:casanareapp/pages/site.details.dart';
 import 'package:casanareapp/widgets/cards/card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// ignore: must_be_immutable
 class ListBusinessPage extends StatefulWidget {
   int cityId;
   int siteTypeId;
@@ -12,10 +12,11 @@ class ListBusinessPage extends StatefulWidget {
   String cityName;
 
   ListBusinessPage(
-      {required this.cityId,
+      {Key? key,
+      required this.cityId,
       required this.cityName,
       required this.siteTypeId,
-      required this.text});
+      required this.text}) : super(key: key);
 
   @override
   _BusinessPageState createState() => _BusinessPageState();
@@ -86,7 +87,7 @@ class _BusinessPageState extends State<ListBusinessPage> {
             }
             return ListView(children: list);
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         });
   }
