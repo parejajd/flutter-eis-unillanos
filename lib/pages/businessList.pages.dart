@@ -9,9 +9,13 @@ class ListBusinessPage extends StatefulWidget {
   int cityId;
   int siteTypeId;
   String text;
+  String cityName;
 
   ListBusinessPage(
-      {required this.cityId, required this.siteTypeId, required this.text});
+      {required this.cityId,
+      required this.cityName,
+      required this.siteTypeId,
+      required this.text});
 
   @override
   _BusinessPageState createState() => _BusinessPageState();
@@ -40,19 +44,36 @@ class _BusinessPageState extends State<ListBusinessPage> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  AppBar(
-        automaticallyImplyLeading: true,
-        title: SelectableText("Listado de Empresas"),
+      // SliverAppBar is declared in Scaffold.body, in slivers of a
+      // CustomScrollView.
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            pinned: true,
+            snap: true,
+            floating: true,
+            expandedHeight: 160.0,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(widget.cityName),
+              background: Image.asset(
+                'assets/casanare.jpg',
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          // If the main content is a list, use SliverList instead.
+          SliverFillRemaining(
+            child: _body(context),
+          ),
+        ],
       ),
-      body: _body(),
     );
   }
 
-  _body() {
+  _body(BuildContext context) {
     return FutureBuilder(
         future: business,
         builder: (BuildContext context, AsyncSnapshot snapshot) {

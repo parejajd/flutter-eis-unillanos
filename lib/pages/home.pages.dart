@@ -4,6 +4,8 @@ import 'package:casanareapp/models/cities.model.dart';
 import 'package:casanareapp/models/site_type.dart';
 import 'package:casanareapp/pages/businessList.pages.dart';
 import 'package:casanareapp/pages/site.details.dart';
+import 'package:casanareapp/pages/site.list.dart';
+import 'package:casanareapp/widgets/apptitle.widget.dart';
 import 'package:casanareapp/widgets/sites.map.dart';
 import 'package:flutter/material.dart';
 
@@ -55,29 +57,10 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: const Color.fromRGBO(52, 26, 121, 1),
             flexibleSpace:
                 Image.asset('assets/logo.png', alignment: Alignment.centerLeft),
-            actions: <Widget>[
-              Container(
-                  child: IconButton(
-                    icon: const Icon(Icons.menu),
-                    alignment: Alignment.bottomLeft,
-                    // ignore: avoid_print
-                    onPressed: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailsPage(id: 16142)))
-                    },
-                  ),
-                  alignment: Alignment.bottomCenter,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(5),
-                  )),
-            ],
           ),
           const SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(10, 80, 10, 100),
+              padding: EdgeInsets.fromLTRB(20, 80, 10, 50),
               child: SizedBox(
                 height: 60,
                 child: Center(
@@ -135,11 +118,12 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(40, 40, 0, 20),
             child: Container(
-              child: const Text(
-                '¿Que estas Buscando?',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+              child: AppTitle(
+                text: "¿Que estas buscando?",
+                weight: FontWeight.w500,
+                fontSize: 22,
+                icon: Icons.add_business_outlined,
+                color: Colors.white,
               ),
               alignment: Alignment.centerLeft,
             ),
@@ -255,46 +239,48 @@ class _HomePageState extends State<HomePage> {
                 )),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(250, 0, 40, 0),
+            padding: const EdgeInsets.fromLTRB(40, 5, 40, 20),
             child: Container(
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  if (name == null || names == null) {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return const AlertDialog(
-                          // Retrieve the text the that user has entered by using the
-                          // TextEditingController.
-                          content: Text("Error ingresa datos para buscar"),
-                        );
-                      },
-                    );
-                  } else {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ListBusinessPage(
-                            cityId: name!.id,
-                            siteTypeId: names!.id,
-                            text: myController.text),
-                      ),
-                    );
-                  }
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      const Color.fromRGBO(118, 67, 234, 1)),
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
-                  textStyle:
-                      MaterialStateProperty.all(const TextStyle(fontSize: 30)),
-                ),
-                icon: const Icon(Icons.search, size: 40),
-                label: const Text(' Buscar  '),
-              ),
+              child: ElevatedButton(
+                  onPressed: () {
+                    if (name == null || names == null) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const AlertDialog(
+                            // Retrieve the text the that user has entered by using the
+                            // TextEditingController.
+                            content: Text("Error ingresa datos para buscar"),
+                          );
+                        },
+                      );
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ListBusinessPage(
+                                cityId: name!.id,
+                                siteTypeId: names!.id,
+                                cityName: name!.name,
+                                text: myController.text),
+                          ));
+                    }
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        const Color.fromRGBO(118, 67, 234, 1)),
+                    padding:
+                        MaterialStateProperty.all(const EdgeInsets.all(10)),
+                    textStyle: MaterialStateProperty.all(
+                        const TextStyle(fontSize: 30)),
+                  ),
+                  child: Row(children: [
+                    const Icon(Icons.search, size: 40),
+                    const Text(' Buscar  '),
+                  ])),
               alignment: Alignment.bottomRight,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(1),
+                borderRadius: BorderRadius.circular(5),
               ),
             ),
           ),

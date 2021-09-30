@@ -15,7 +15,7 @@ class BussinessProvider {
     }
 
     var response = await http.get(Uri.https('casanare.app',
-        '/api/v1/Sites/Search/$text/$cityId/$siteTypeId/0/true/$page/10'));
+        '/api/v1/Sites/Search/$text/$cityId/$siteTypeId/0/true/$page/50'));
     if (response.statusCode == 200) {
       var jsonResponse =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
