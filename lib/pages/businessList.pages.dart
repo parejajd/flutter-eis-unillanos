@@ -1,6 +1,7 @@
 import 'package:casanareapp/Providers/business.provider.dart';
 import 'package:casanareapp/models/business.model.dart';
 import 'package:casanareapp/pages/site.details.dart';
+import 'package:casanareapp/widgets/cards/card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -39,39 +40,33 @@ class _BusinessPageState extends State<ListBusinessPage> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: business,
-      builder: (BuildContext context, AsyncSnapshot<List<Business>> snapshot) {
-        if (snapshot.hasData) {
-          List<Business>? businesses = snapshot.data;
-          List<Widget> list = [];
-
-          for (var business in businesses!) {
-            list.add(GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DetailsPage(id: business.id)),
-                  );
-                },
-                //return Container()
-                child: Card(
-                    child: ListTile(
-                        title: Text(business.name),
-                        subtitle: Text(business.address),
-                        leading: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-                        trailing: Icon(Icons.keyboard_arrow_right)))));
-          }
-          return ListView(children: list);
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
+    return Scaffold(
+      appBar:  AppBar(
+        automaticallyImplyLeading: true,
+        title: SelectableText("Listado de Empresas"),
+      ),
+      body: _body(),
     );
+  }
+
+  _body() {
+    return FutureBuilder(
+        future: business,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            List<Business>? businesses = snapshot.data;
+            List<Widget> list = [];
+
+            for (var business in businesses!) {
+              list.add(CardWidget(business: business));
+            }
+            return ListView(children: list);
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        });
   }
 }
