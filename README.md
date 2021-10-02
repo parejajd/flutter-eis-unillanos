@@ -22,16 +22,16 @@ Estas son las funcionalidades desarrolladas para el proyecto
 ## 1. Página de Inicio.
 Muestra el listado de municipios, las diferentes de categorias y permite con esos parámetros buscar las empresas
 ### Icono personalizado de la app
-![Icono personalizado de la app](/screenshots/icono.jpeg)
+![Icono personalizado de la app](screenshots/Icono.jpeg)
 
 ### Splash Screen
-![Splash screen](/screenshots/splash.jpeg)
+![Splash screen](screenshots/Splash.jpeg)
 
 ### Buscador sin datos
-![Buscador sin datos](/screenshots/inicio1.jpeg)
+![Buscador sin datos](screenshots/Inicio1.jpeg)
 
 ### Buscador con datos
-![Buscador con datos](/screenshots/inicio2.jpeg)
+![Buscador con datos](screenshots/Inicio2.jpeg)
 
 ## 2. Página de Listado de Empresas
 Muestras las empresas según los parametros especificados
@@ -46,19 +46,19 @@ Una vez seleccionada una empresa en el listado anterior, se observan diferentes 
 - Empresas no autenticadas. Tienen la información básica de la empresa que se encuentra registrada en la camara de comercio
 
 ### Detalle de una empresa autenticada
-![Detalle de la empresa Autenticada](/screenshots/detallesempresa.jpeg)
+![Detalle de la empresa Autenticada](screenshots/DetallesEmpresa.jpeg)
 
 ### Detalle de una empresa no autenticada
-![Detalle de la empresa no autenticada](/screenshots/detalleempresa2.jpeg)
+![Detalle de la empresa no autenticada](screenshots/DetalleEmpresa2.jpeg)
 
 ### Pantalla al compartir una empresa
-![Compartir una empresa](/screenshots/compartir.jpeg)
+![Compartir una empresa](screenshots/Compartir.jpeg)
 
 ### Llamada a una empresa
-![Llamada](/screenshots/llamar.jpeg)
+![Llamada](screenshots/Llamar.jpeg)
 
 ### Localizacion de la empresa en GPS (Solo para empresas autenticadas)
-![Localización GPS](/screenshots/localizacion.jpeg)
+![Localización GPS](screenshots/Localizacion.jpeg)
 
 
 
